@@ -47,14 +47,15 @@ const endpoint = async (request: Request) => {
 
 		const message = body.message
 		const email = validateEmail(body?.email) || "anonymous"
+		const dateSubmitted = new Date().toISOString()
 
 		const feedback = {
 			email,
 			message,
-			dateSubmitted: new Date().toISOString()
+			dateSubmitted			
 		}
 
-		await kv.set(["feedback", email], feedback)
+		await kv.set(["feedback", email, dateSubmitted], feedback)
 		return new Response("Feedback recieved", { status: 200 })
 	} catch (error) {
 		console.error(error)
