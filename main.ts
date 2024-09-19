@@ -56,7 +56,13 @@ const endpoint = async (request: Request) => {
 		}
 
 		await kv.set(["feedback", email, dateSubmitted], feedback)
-		return new Response("Feedback recieved", { status: 200 })
+		return new Response("Feedback recieved", { 
+			status: 200,
+			headers: {
+				"content-type": "application/json",
+				"Access-Control-Allow-Origin": "*"
+			}
+		})
 	} catch (error) {
 		console.error(error)
 		return new Response("Internal server error", { status: 500 })
