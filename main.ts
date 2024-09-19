@@ -12,7 +12,14 @@ const endpoint = async (request: Request) => {
 
 	// If request method is OPTIONS, return 200
 	if (request.method === "OPTIONS")
-		return new Response(null, { status: 200 })
+		return new Response(null, {
+			status: 200,
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods": "GET, POST",
+				"Access-Control-Allow-Headers": "*"
+			}
+		})
 
 	// If GET request, return all feedback from KV
 	if (request.method === "GET") {
