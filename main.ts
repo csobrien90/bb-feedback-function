@@ -13,10 +13,10 @@ const endpoint = async (request: Request) => {
 	// If request method is OPTIONS, return 200
 	if (request.method === "OPTIONS")
 		return new Response(null, {
-			status: 200,
+			status: 204,
 			headers: {
 				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods": "GET, POST",
+				"Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 				"Access-Control-Allow-Headers": "*"
 			}
 		})
