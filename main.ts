@@ -7,8 +7,19 @@ const validateEmail = (email: string) => {
 
 const endpoint = async (request: Request) => {
 	// If request method is not GET or POST, return 405
-	if (!["GET", "POST"].includes(request.method))
+	if (!["GET", "POST", "OPTIONS"].includes(request.method))
 		return new Response("Method not allowed", { status: 405 })
+
+	// If request method is OPTIONS, return 200
+	if (request.method === "OPTIONS")
+		return new Response(null, {
+			status: 200,
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+				"Access-Control-Allow-Headers": "Content-Type"
+			}
+		})
 
 	// If GET request, return all feedback from KV
 	if (request.method === "GET") {
