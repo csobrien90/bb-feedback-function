@@ -31,7 +31,10 @@ const endpoint = async (request: Request) => {
 			}
 	
 			return new Response(JSON.stringify(feedbackArray), {
-				headers: { "content-type": "application/json" }
+				headers: {
+					"content-type": "application/json",
+					"Access-Control-Allow-Origin": "*"
+				}
 			})
 		} catch (error) {
 			console.error(error)
